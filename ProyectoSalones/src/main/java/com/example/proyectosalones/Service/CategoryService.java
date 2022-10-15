@@ -5,8 +5,12 @@ import com.example.proyectosalones.Model.Category;
 import com.example.proyectosalones.Repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class CategoryService {
@@ -39,13 +43,22 @@ public class CategoryService {
         if(category.getId() != null){
             Optional<Category> g = categoryRepository.getCategory(category.getId());
             if(g.isPresent()){
-                if(category.getDescription() != null){
-                    g.get().setDescription(category.getDescription());
+                for (Field f : category.getClass().getDeclaredFields()) {
+                    f.setAccessible(true);
+                    Object value;
+                    try {
+                        value = f.get(category);
+                        if (value != null) {
+                            System.out.println("entro");
+                            f.set(g.get(), value);
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                if(category.getName()!=null){
-                    g.get().setName(category.getName());
-                }
-                return  categoryRepository.save(g.get());
+                return categoryRepository.save(g.get());
             }
         }
         return category;

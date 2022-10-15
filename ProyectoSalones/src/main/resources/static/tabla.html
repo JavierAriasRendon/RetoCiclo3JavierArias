@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang-"en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PartyRoom</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/misFunciones.js"></script>
+
+
+</head>
+
+
+<body>
+<h1> Solución Reto 2</h1>
+<h1>Salones</h1>
+<div id="resultado"></div>
+
+<button onclick="traerInformacion()"> Consultar </button>
+
+<div>
+    <input type="number" id="id" placeholder="id">
+    <input type="text" id="owner" placeholder="owner">
+    <input type="number" id="capacity" placeholder="capacity">
+    <input type="number" id="category_id" placeholder="category_id">
+    <input type="text" id="name" placeholder="name">
+
+</div>
+
+<button onclick="guardarInformacion()">Guardar</button>
+<button onclick="editarInformacion()">Actualizar</button>
+
+<!--- ---- tabla cliente --->
+
+<h1>Tabla Clientes</h1>
+<div id="resultadoCliente"></div>
+<button onclick="traerInformacionCliente()"> Consultar </button>
+
+<div>
+    <input type="number" id="idCliente" placeholder="id">
+    <input type="text" id="nameCliente" placeholder="name">
+    <input type="text" id="emailCliente" placeholder="email">
+    <input type="number" id="ageCliente" placeholder="age">
+
+</div>
+
+<button onclick="guardarInformacionCliente()">Guardar</button>
+<button onclick="editarInformacionCliente()">Actualizar</button>
+
+<!--- ---- tabla mensaje --->
+
+<h1>Tabla Mensajes</h1>
+<div id="resultadoMensaje"></div>
+<button onclick="traerInformacionMensaje()"> Consultar </button>
+
+<div>
+    <input type="number" id="idMensaje" placeholder="id">
+    <input type="text" id="messagetextMensaje" placeholder="messagetext">
+
+
+</div>
+
+<button onclick="guardarInformacionMensaje()">Guardar</button>
+<button onclick="editarInformacionMensaje()">Actualizar</button>
+
+
+
+</body>
+
+</html>

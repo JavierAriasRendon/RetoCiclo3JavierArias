@@ -5,8 +5,12 @@ import com.example.proyectosalones.Model.Message;
 import com.example.proyectosalones.Repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class MessageService {
@@ -39,8 +43,20 @@ public class MessageService {
         if(message.getIdMessage()!=null){
             Optional<Message> e= messageRepository.getMessage(message.getIdMessage());
             if(e.isPresent()){
-                if(message.getMessageText()!=null){
-                    e.get().setMessageText(message.getMessageText());
+                for (Field f : message.getClass().getDeclaredFields()) {
+                    f.setAccessible(true);
+                    Object value;
+                    try {
+                        value = f.get(message);
+                        if (value != null) {
+                            System.out.println("entro");
+                            f.set(e.get(), value);
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 messageRepository.save(e.get());
                 return e.get();

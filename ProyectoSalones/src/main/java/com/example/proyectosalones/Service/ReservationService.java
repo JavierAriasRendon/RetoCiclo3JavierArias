@@ -6,12 +6,15 @@ import com.example.proyectosalones.Repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class ReservationService {
@@ -45,14 +48,20 @@ public class ReservationService {
             Optional<Reservation> e= reservationRepository.getReservation(reservation.getIdReservation());
             if(e.isPresent()){
 
-                if(reservation.getStartDate()!=null){
-                    e.get().setStartDate(reservation.getStartDate());
-                }
-                if(reservation.getDevolutionDate()!=null){
-                    e.get().setDevolutionDate(reservation.getDevolutionDate());
-                }
-                if(reservation.getStatus()!=null){
-                    e.get().setStatus(reservation.getStatus());
+                for (Field f : reservation.getClass().getDeclaredFields()) {
+                    f.setAccessible(true);
+                    Object value;
+                    try {
+                        value = f.get(reservation);
+                        if (value != null) {
+                            System.out.println("entro");
+                            f.set(e.get(), value);
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 reservationRepository.save(e.get());
                 return e.get();

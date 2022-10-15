@@ -6,8 +6,11 @@ import com.example.proyectosalones.Repository.PartyroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class PartyroomService {
@@ -40,23 +43,22 @@ public class PartyroomService {
         if (room.getId() != null) {
             Optional<Partyroom> e = partyroomRepository.getRoom(room.getId());
             if (e.isPresent()) {
-                if (room.getName() != null) {
-                    e.get().setName(room.getName());
+                for (Field f : room.getClass().getDeclaredFields()) {
+                    f.setAccessible(true);
+                    Object value;
+                    try {
+                        value = f.get(room);
+                        if (value != null) {
+                            System.out.println("entro");
+                            f.set(e.get(), value);
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                if (room.getName() != null) {
-                    e.get().setName(room.getName());
-                }
-                if (room.getCapacity() != null) {
-                    e.get().setCapacity(room.getCapacity());
-                }
-                if (room.getDescription() != null) {
-                    e.get().setDescription(room.getDescription());
-                }
-                if (room.getCategory() != null) {
-                    e.get().setCategory(room.getCategory());
-                }
-                partyroomRepository.save(e.get());
-                return e.get();
+                return partyroomRepository.save(e.get());
             } else {
                 return room;
             }

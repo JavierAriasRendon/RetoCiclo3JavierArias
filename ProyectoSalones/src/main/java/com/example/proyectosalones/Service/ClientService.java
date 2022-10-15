@@ -5,8 +5,12 @@ import com.example.proyectosalones.Model.Client;
 import com.example.proyectosalones.Repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class ClientService {
@@ -39,14 +43,20 @@ public class ClientService {
         if(client.getIdClient()!=null){
             Optional<Client> e= clientRepository.getClient(client.getIdClient());
             if(e.isPresent()){
-                if(client.getName()!=null){
-                    e.get().setName(client.getName());
-                }
-                if(client.getAge()!=null){
-                    e.get().setAge(client.getAge());
-                }
-                if(client.getPassword()!=null){
-                    e.get().setPassword(client.getPassword());
+                for (Field f : client.getClass().getDeclaredFields()) {
+                    f.setAccessible(true);
+                    Object value;
+                    try {
+                        value = f.get(client);
+                        if (value != null) {
+                            System.out.println("entro");
+                            f.set(e.get(), value);
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(CategoryService.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 clientRepository.save(e.get());
                 return e.get();
