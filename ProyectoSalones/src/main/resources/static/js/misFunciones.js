@@ -1,6 +1,7 @@
+
 function traerInformacion(){
     $.ajax({
-        url:"https://g8ba605dcd09c9d-yy2od4tqd6xe8s2b.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/partyroom/partyroom",
+        url:"http://localhost:8080/api/Partyroom/all",
         type:"GET",
         dataType:"JSON",
         success : function (respuesta){
@@ -40,7 +41,7 @@ function guardarInformacion() {
     };
     let dataToSend = JSON.stringify(myData);
     $.ajax({
-        url:"https://g8ba605dcd09c9d-yy2od4tqd6xe8s2b.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/partyroom/partyroom",
+        url:"http://localhost:8080/api/Partyroom/save",
         type:"POST",
         data:myData,
         dataType:"JSON",
@@ -68,7 +69,7 @@ function editarInformacion(){
     console.log(myData);
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"https://g8ba605dcd09c9d-yy2od4tqd6xe8s2b.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/partyroom/partyroom",
+        url:"https://localhost:8080/Partyroom/update",
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -92,7 +93,7 @@ function borrarElemento(idElemento){
     };
     let dataToSent=JSON.stringify(myData);
     $.ajax({
-        url:"https://g8ba605dcd09c9d-yy2od4tqd6xe8s2b.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/partyroom/partyroom",
+        url:"https://localhost:8080/api/1",
         type:"DELETE",
         data:dataToSent,
         contentType:"application/JSON",
@@ -105,7 +106,6 @@ function borrarElemento(idElemento){
     });
 }
 // tablas para clientes
-
 
 
 function traerInformacionCliente(){

@@ -1,6 +1,8 @@
 package com.example.proyectosalones.Controller;
 
 
+import com.example.proyectosalones.Model.DTOs.CountClient;
+import com.example.proyectosalones.Model.DTOs.StatusReservation;
 import com.example.proyectosalones.Model.Reservation;
 import com.example.proyectosalones.Service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,7 @@ public class ReservationController {
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Reservation update(@RequestBody Reservation reservation) {
+
         return reservationService.update(reservation);
     }
 
@@ -47,18 +50,20 @@ public class ReservationController {
         return reservationService.deleteReservation(reservationId);
     }
 
-    //5
-    /*@GetMapping("/report-status")
-    public StatusReservation getReservationStatus(){
-        return reservationService.getStatusReport();
-    }
-
     @GetMapping("/report-clients")
     public List<CountClient> getCountClient(){
         return reservationService.getTopClients();
     }
+
+
+    @GetMapping("/report-status")
+    public StatusReservation getReservationStatus(){
+        return reservationService.getStatusReport();
+    }
+
+
     @GetMapping("/report-dates/{dateOne}/{dateTwo}")
     public List<Reservation> getDatesReport(@PathVariable("dateOne")String d1, @PathVariable("dateTwo")String d2){
         return reservationService.getReservationPeriod(d1,d2);
-    }*/
+    }
 }
