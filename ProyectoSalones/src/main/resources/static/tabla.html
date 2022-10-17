@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang-"en">
+<html lang-en>
 
 <head>
     <meta charset="UTF-8">
     <title>PartyRoom</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/misFunciones.js"></script>
 
@@ -12,57 +13,167 @@
 
 
 <body>
-<h1> Solución Reto 2</h1>
+<h1> Partyroom</h1>
 <h1>Salones</h1>
-<div id="resultado"></div>
-
-<button onclick="traerInformacion()"> Consultar </button>
 
 <div>
-    <input type="number" id="id" placeholder="id">
+    <input type="hidden" id="id">
+    <input type="text" id="name" placeholder="name">
     <input type="text" id="owner" placeholder="owner">
     <input type="number" id="capacity" placeholder="capacity">
-    <input type="number" id="category_id" placeholder="category_id">
-    <input type="text" id="name" placeholder="name">
+    <input type="text" id="description" placeholder="description">
 
 </div>
 
-<button onclick="guardarInformacion()">Guardar</button>
-<button onclick="editarInformacion()">Actualizar</button>
+<button onclick="guardarInformacionPartyroom()">Guardar</button>
+<button onclick="actualizarPartyroom()">Actualizar</button>
 
-<!--- ---- tabla cliente --->
+<button onclick="traerInformacionSalones()"> Consultar </button>
 
-<h1>Tabla Clientes</h1>
-<div id="resultadoCliente"></div>
-<button onclick="traerInformacionCliente()"> Consultar </button>
+<div class="fs-2">
+
+    <table id="tablaSalones" class="table">
+
+
+    </table>
+
+
+</div>
+
+
+<!--- Clientes --->
+
+<h1>Clientes</h1>
 
 <div>
-    <input type="number" id="idCliente" placeholder="id">
+    <input type="hidden" id="idClient">
     <input type="text" id="nameCliente" placeholder="name">
-    <input type="text" id="emailCliente" placeholder="email">
-    <input type="number" id="ageCliente" placeholder="age">
+    <input type="text" id="email" placeholder="email">
+    <input type="text" id="password" placeholder="password">
+    <input type="number" id="age" placeholder="age">
 
 </div>
 
 <button onclick="guardarInformacionCliente()">Guardar</button>
-<button onclick="editarInformacionCliente()">Actualizar</button>
+<button onclick="actualizarCliente()">Actualizar</button>
 
-<!--- ---- tabla mensaje --->
+<button onclick="traerInformacionClientes()"> Consultar </button>
 
-<h1>Tabla Mensajes</h1>
-<div id="resultadoMensaje"></div>
-<button onclick="traerInformacionMensaje()"> Consultar </button>
+<div class="fs-2">
 
-<div>
-    <input type="number" id="idMensaje" placeholder="id">
-    <input type="text" id="messagetextMensaje" placeholder="messagetext">
+    <table id="tablaClientes" class="table">
+
+
+    </table>
 
 
 </div>
 
-<button onclick="guardarInformacionMensaje()">Guardar</button>
-<button onclick="editarInformacionMensaje()">Actualizar</button>
 
+
+<!--- Mensajes --->
+
+<h1>Mensajes</h1>
+
+<div>
+    <input type="hidden" id="idMessage">
+    <input type="text" id="messageText" placeholder="messageText">
+
+</div>
+
+<button onclick="guardarInformacionMensaje()">Guardar</button>
+<button onclick="actualizarMensaje()">Actualizar</button>
+
+<button onclick="traerInformacionMensaje()"> Consultar </button>
+
+<div class="fs-2">
+
+    <table id="tablaMensajes" class="table">
+
+
+    </table>
+
+
+</div>
+
+
+<!--- Categorias --->
+
+<h1>Categorias</h1>
+
+<div>
+    <input type="hidden" id="idCategory">
+    <input type="text" id="nameCategory" placeholder="category">
+    <input type="text" id="descriptionCategory" placeholder="description">
+
+</div>
+
+<button onclick="guardarInformacionCategoria()">Guardar</button>
+<button onclick="actualizarCategoria()">Actualizar</button>
+
+<button onclick="traerInformacionCategorias()"> Consultar </button>
+
+<div class="fs-2">
+
+    <table id="tablaCategorias" class="table">
+
+
+    </table>
+
+
+</div>
+
+<!--- Reservas --->
+
+<h1>Reservas</h1>
+
+<div>
+    <input type="hidden" id="idReservation">
+    <input type="date" id="startDate" placeholder="startDate">
+    <input type="date" id="devolutionDate" placeholder="devolutionDate">
+    <input type="text" id="status" placeholder="status">
+
+</div>
+
+<button onclick="guardarInformacionReserva()">Guardar</button>
+<button onclick="actualizarReserva()">Actualizar</button>
+
+<button onclick="traerInformacionReservas()"> Consultar </button>
+
+<div class="fs-2">
+
+    <table id="tablaReservas" class="table">
+
+
+    </table>
+
+
+</div>
+
+<!--- Score --->
+
+<h1>Calificación</h1>
+
+<div>
+    <input type="hidden" id="idScore">
+    <input type="text" id="messageTextScore" placeholder="messageText">
+    <input type="number" id="stars" placeholder="stars">
+
+
+</div>
+
+<button onclick="guardarInformacionScore()">Guardar</button>
+<button onclick="traerInformacionScore()"> Consultar </button>
+
+<div class="fs-2">
+
+    <table id="tablaScore" class="table">
+
+
+    </table>
+
+
+</div>
 
 
 </body>

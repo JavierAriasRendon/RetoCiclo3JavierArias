@@ -15,7 +15,6 @@ public class Partyroom implements Serializable {
     private String name;
     private String owner;
     private Integer capacity;
-    //private Integer category; // no sé por qué se pone asi.
     private String description;
 
 
